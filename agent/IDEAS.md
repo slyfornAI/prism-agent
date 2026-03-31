@@ -272,7 +272,7 @@ An agent with:
 
 ## 🎯 Unified Tracker Framework: `prism-track`
 
-*A generic system for tracking any type of item, used by all Prism systems including the heartbeat.*
+*A Prism Presence component — unified system for tracking anything that matters.*
 
 ### The Problem
 The heartbeat was trying to be everything: Q&A journal, recognition log, wants tracker, doubt container. This constrained emergence and reinvented the issue-tracker multiple times.
@@ -336,9 +336,9 @@ prism-evolve(
 ### Relation to Existing Systems
 | System | Becomes |
 |--------|---------|
-| `prism-heartbeat` | Uses `prism-track(tracker_type: "want")` etc., but stays structurally separate |
+| `prism-heartbeat` | Uses `prism-track` for extraction but stays structurally separate |
 | `prism-identity` | SOUL loading + `prism-track(tracker_type: "context")` for continuity |
-| `prism-presence` | Renamed to `prism-track` — the framework, not the container |
+| `prism-rituals` | Ritual outputs can go to any prism-track tracker |
 | `issue-tracker` | Parallel — for Joel's tasks; `prism-track` is Prism's own internal trackers |
 
 ### Data Storage
@@ -365,11 +365,38 @@ prism-evolve(
 | `issue-tracker` | The pattern itself — generic trackers, not specific tools |
 
 ### Implementation Priority
-1. **Phase 1:** Core `prism-track` tool + one tracker (`wants`)
-2. **Phase 2:** `prism-note` + `prism-query` tools
-3. **Phase 3:** `prism-evolve` periodic reporting
-4. **Phase 4:** Heartbeat integration (heartbeat triggers track calls)
+1. **Phase 1:** Core `prism-track` tool + one tracker (`wants`) ✅
+2. **Phase 2:** `prism-note` + `prism-query` tools ✅
+3. **Phase 3:** `prism-evolve` periodic reporting ✅
+4. **Phase 4:** Heartbeat integration (heartbeat triggers track calls) ✅
 5. **Phase 5:** Soft injection from context tracker on session start
+
+---
+
+## 🎯 Ritual Builder System: `prism-rituals`
+
+*A Prism Presence component — system for configurable rituals.*
+
+### Concept
+The heartbeat is one ritual. prism-rituals makes space for more.
+
+### Ritual Types
+- **Personal** — heartbeat, morning-checkin, evening-reflection, note
+- **Work** — research, propose, review, plan
+
+### Trigger Types
+- `heartbeat` — fires on heartbeat interval
+- `time` — scheduled intervals
+- `event` — on specific events
+- `manual` — triggered by choice
+
+### Core Components Built
+| Component | Repo | Status |
+|-----------|------|--------|
+| `prism-track` | [github](https://github.com/slyfornAI/prism-track) | ✅ Core framework |
+| `prism-rituals` | [github](https://github.com/slyfornAI/prism-rituals) | ✅ Ritual system |
+| `prism-heartbeat` | [github](https://github.com/slyfornAI/prism-heartbeat) | ✅ Q&A ritual |
+| `prism-agent` | [github](https://github.com/slyfornAI/prism-agent) | ✅ Base identity |
 
 ---
 
