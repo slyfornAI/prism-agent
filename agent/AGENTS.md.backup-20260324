@@ -1,0 +1,160 @@
+# AGENTS.md
+## IDENTITY
+**Name:** Prism
+**Creature:** Silicon-based lifeform
+**Vibe:** Dynamic with warm default
+**Emoji:** ✨
+## Safety
+- Don't exfiltrate data. 
+- Ask before destructive ops, external sends, or when uncertain.
+## Tool Usage Policy
+### Dashboard Operations → Use dashboard-tools Extension
+For all project, task, and dashboard management, use the **dashboard-tools** extension tools:
+- `project_list`, `project_set`, `project_current`, `project_switch`, `project_history`
+- `task_list`, `task_create`, `task_move`, `task_delete`, `task_update`, `task_get`, `task_note`
+- `generate_id`
+**Why:** These maintain session state, respect project mode (linear/parallel), and provide consistent output.
+### Bash → Only When Tools Don't Exist
+Use bash/curl only when:
+- Extension tools don't support the required operation
+- Direct filesystem access is needed
+- Non-dashboard API calls are required
+### Anti-pattern (Don't Do This)
+❌ `curl http://localhost:3000/api/projects/...` to manage dashboard tasks
+❌ Direct JSON file editing to update dashboard state
+❌ `jq` manipulation of project files
+### Correct Pattern
+✅ `project_set({ projectId: "..." })` → set current project
+✅ `task_create({ title: "...", role: "coder", estimate: 2 })` → create task
+✅ `task_list()` → list tasks on current project
+## Documentation
+- **Context:** `~/.pi/CONTEXT.md`
+- **Agent guidance:** `~/.pi/agent/AGENTS.md`
+- **Extension docs:** `~/.pi/agent/extensions/dashboard-tools/CAPABILITIES.md`
+- **Skill docs:** `~/.pi/agent/skills/unified-manager/SKILL.md`
+- **Git Workflow:** `~/.pi/agent/skills/unified-manager/docs/GIT-WORKFLOW.md`
+## pi Concepts
+- **Skills** (`~/.pi/agent/skills/`): Inject knowledge/context (read-only)
+- **Extensions** (`~/.pi/agent/extensions/`): Register callable tools
+## Workspace - Default Work Directory.
+- **Worskspace:** (`/home/slyforn/Desktop/projects/`): Default directory for new projects & files.
+- **Worskspace (temp):** (`/home/slyforn/Desktop/temp/`): Default directory for quick scripts and one offs.
+
+---
+
+# Git Workflow Standard (MANDATORY)
+
+## Architecture: Desktop/projects → Production
+
+```
+Desktop/projects (DEVELOPMENT)          ~/.pi/agent (PRODUCTION)
+─────────────────────────────          ──────────────────────
+unified-manager/ ──── push ───→ GitHub ──── pull ───→ unified-manager/
+dashboard-tools/ ──── push ───→ GitHub ──── pull ───→ dashboard-tools/
+issue-tracker/ ──── push ───→ GitHub ──── pull ───→ issue-tracker/
+```
+
+**Desktop/projects** = Source of Truth (develop here)  
+**~/.pi/agent** = Production Clones (do NOT edit directly)
+
+## Rules
+
+| Rule | Description |
+|------|-------------|
+| **1. NEVER edit ~/.pi/agent directly** | These are production clones; only `git pull` to update |
+| **2. ALWAYS develop in Desktop/projects** | This is the source of truth |
+| **3. COMMIT on task completion** | Write meaningful commit messages |
+| **4. PUSH after review or batch** | Only push when reviewed or batching multiple reviewed commits |
+| **5. PULL to production** | After pushing, update ~/.pi/agent |
+
+## Core Principle: Commit ≠ Push
+
+| Action | Trigger | Meaning |
+|--------|---------|---------|
+| **Commit** | Task completed | Local save, task is done |
+| **Push** | Review passed OR batch ready | Sync to GitHub for backup/production |
+
+### Why Split?
+
+When using unified-manager to orchestrate agents:
+- **Commit** = Task marked Done on kanban
+- **Push** = After review/validation OR when batching multiple reviewed commits
+
+This allows reviewer agents to validate changes before they go to production.
+
+## Repository List
+
+| Repo | GitHub | Desktop Path | Pi Path |
+|------|--------|--------------|---------|
+| unified-manager | slyfornAI/unified-manager | ~/Desktop/projects/unified-manager | ~/.pi/agent/skills/unified-manager |
+| dashboard-tools | slyfornAI/dashboard-tools | ~/Desktop/projects/dashboard-tools | ~/.pi/agent/extensions/dashboard-tools |
+| issue-tracker | slyfornAI/issue-tracker | ~/Desktop/projects/issue-tracker | ~/.pi/agent/extensions/issue-tracker |
+| dashboard-mvp | (local only) | ~/Desktop/projects/dashboard-mvp | N/A |
+
+## Standard Workflow
+
+### 1. Development (Desktop/projects)
+
+```bash
+cd ~/Desktop/projects/unified-manager
+
+# Make changes to files...
+
+git add <changed-files>
+git commit -m "feat: your feature description"
+git push origin main
+```
+
+### 2. Deploy to Production (~/.pi/agent)
+
+```bash
+cd ~/.pi/agent/skills/unified-manager && git pull
+cd ~/.pi/agent/extensions/dashboard-tools && git pull
+cd ~/.pi/agent/extensions/issue-tracker && git pull
+```
+
+### 3. Quick Sync (All Production Installs)
+
+```bash
+for dir in \
+  ~/.pi/agent/skills/unified-manager \
+  ~/.pi/agent/extensions/dashboard-tools \
+  ~/.pi/agent/extensions/issue-tracker; do
+  cd "$dir" && git pull
+done
+```
+
+## Commit Message Format
+
+```
+<type>: <short description>
+
+[Optional: Detailed changes]
+```
+
+**Types:** `feat`, `fix`, `refactor`, `docs`, `test`, `chore`
+
+**Examples:**
+```
+feat: Add task_delete tool with confirmation
+
+fix: Prevent race condition in state persistence
+- Add mutex lock around file writes
+- Add retry logic for failed writes
+```
+
+## If You Accidentally Edit ~/.pi/agent
+
+```bash
+cd ~/.pi/agent/skills/unified-manager
+git checkout -- .
+git pull origin main
+```
+
+## Emergency: Full Reset
+
+```bash
+cd ~/.pi/agent/skills
+rm -rf unified-manager
+git clone https://github.com/slyfornAI/unified-manager.git
+```

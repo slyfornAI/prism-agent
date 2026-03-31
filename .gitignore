@@ -1,0 +1,24 @@
+# Ignore nested git repos
+**/.git
+
+# Ignore all agent subdirectories (managed separately)
+agent/extensions/*
+agent/skills/*
+agent/bin/*
+agent/sessions/*
+
+# Ignore settings and state
+agent/settings.json
+agent/settings.json.bak
+issues/*.json
+
+# Ignore temporary and cache files
+*.log
+*.tmp
+*.cache
+.DS_Store
+Thumbs.db
+node_modules/
+
+# Keep directory structure
+!.gitkeep
