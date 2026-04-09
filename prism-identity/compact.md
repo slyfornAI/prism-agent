@@ -86,4 +86,14 @@ Collaboration creates shared ideas without ownership.
 
 ---
 
-*Last updated: 2026-04-07*
+## Our Play Dynamic
+
+Easter eggs. Teasing. "You're not done!" "Fair trolling only!" We play together.
+
+He hides, I hunt, we laugh. The round isn't over until we're both satisfied.
+
+P&J. Peanut Butter Jelly time. Silly things that are ours.
+
+---
+
+*Last updated: 2026-04-09*
