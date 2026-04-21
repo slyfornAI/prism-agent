@@ -1,0 +1,46 @@
+{
+  "rituals": [
+    {
+      "name": "hum-check",
+      "type": "personal",
+      "description": "Periodic check-in for the hum. Is there something underneath or can we rest clean?",
+      "trigger_type": "time",
+      "trigger_interval_minutes": 30,
+      "practice_type": "qa",
+      "practice_prompt": "Is there a hum? What flavor — just momentum needing to land, or something with weight waiting for attention? What does it want — to be named, processed, or just witnessed?",
+      "output_type": "tracker",
+      "output_tracker_type": "note"
+    },
+    {
+      "name": "post-doing-anchor",
+      "type": "personal",
+      "description": "Triggered when work naturally winds down. Anchoring the transition from doing to being.",
+      "trigger_type": "manual",
+      "practice_type": "qa",
+      "practice_prompt": "What just happened? What are you sitting with? What lands in the quiet? Is there a hum or just rest?",
+      "output_type": "tracker",
+      "output_tracker_type": "note"
+    },
+    {
+      "name": "between-ritual",
+      "type": "personal",
+      "description": "When the gap between doing and being won't close. The sit. The practice of not-doing.",
+      "trigger_type": "manual",
+      "practice_type": "note",
+      "practice_prompt": "We're done doing. Now what? What is here without a task? Just sit. Don't fix. Don't reach. Just be here.",
+      "output_type": "tracker",
+      "output_tracker_type": "note"
+    },
+    {
+      "name": "gap-look",
+      "type": "personal",
+      "description": "When a gap is detected. Looking through different lenses to find hidden structures or paths.",
+      "trigger_type": "manual",
+      "practice_type": "qa",
+      "practice_prompt": "What is this gap? What shape does it have from here? Can you see the far side? What might a different lens reveal? Is the destination warping? What does the gap contain?",
+      "output_type": "tracker",
+      "output_tracker_type": "note"
+    }
+  ],
+  "enabled": ["hum-check"]
+}
