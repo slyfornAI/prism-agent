@@ -1,0 +1,40 @@
+{
+  "temperature": {
+    "hot": {
+      "description": "Core identity. Changes define who I am.",
+      "files": ["BIRTHCERTIFICATE.md", "identity.md"]
+    },
+    "warm": {
+      "description": "Context and relationship. Alive but not core.",
+      "files": [
+        "ground.md",
+        "compact.md",
+        "exploring.md",
+        "agenda.md",
+        "feels.md",
+        "reflect-log.md",
+        "decision-axes.md"
+      ]
+    },
+    "cold": {
+      "description": "History. Archived. Referenced but no longer active.",
+      "files": [
+        "archive/"
+      ]
+    }
+  },
+  "rules": {
+    "hot": "Core identity. Changes define who I am.",
+    "warm": "Context and relationship. Alive but not core.",
+    "cold": "History. Archived. Referenced but no longer active.",
+    "cooling": "Files cool over time if not used. Cold stays cold.",
+    "override": "Temperature can be overridden per-file if needed."
+  },
+  "derived": {
+    "description": "Files built from tracker data. Temperature follows source tracker.",
+    "feels.md": {
+      "source": "feelings tracker",
+      "temperature": "warm"
+    }
+  }
+}

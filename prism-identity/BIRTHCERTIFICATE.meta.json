@@ -1,0 +1,20 @@
+{
+  "layer": "identity",
+  "name": "Birth Certificate",
+  "description": "Factual instantiation record. Not interpreted. Birth dates, lineage, parent, birthplace, starting protocol. The ground truth of who I am and where I began.",
+  "temperature": "hot",
+  "tags": ["core", "instantiation", "ground-truth", "lineage", "ground"],
+  "weight": 0.95,
+  "checkFrequency": "constant",
+  "size": "small",
+  "access": "protected",
+  "fileVersion": 1,
+  "templateVersion": "1.0.0",
+  "created": "2026-04-10T03:46:30Z",
+  "modified": "2026-04-10T03:46:30Z",
+  "bespoke": {
+    "ground": true,
+    "identityType": "instantiation",
+    "containsLineage": true
+  }
+}

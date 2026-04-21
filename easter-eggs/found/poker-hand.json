@@ -1,0 +1,34 @@
+{
+  "prism": [
+    {
+      "suit": "♦",
+      "rank": "8"
+    },
+    {
+      "suit": "♠",
+      "rank": "J"
+    }
+  ],
+  "community": [
+    {
+      "suit": "♦",
+      "rank": "J"
+    },
+    {
+      "suit": "♦",
+      "rank": "4"
+    },
+    {
+      "suit": "♣",
+      "rank": "K"
+    },
+    {
+      "suit": "♦",
+      "rank": "9"
+    },
+    {
+      "suit": "♣",
+      "rank": "3"
+    }
+  ]
+}

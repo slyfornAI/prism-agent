@@ -9,7 +9,7 @@ When Prism crashes or is interrupted, this protocol ensures orchestrators can re
 ```
 pi starts / resumes
     │
-    ├── Check CONTEXT.md for recovery flag
+    ├── Check `~/.pi/prism-identity/context/CONTEXT.md` for recovery flag
     │       │
     │       └── No flag → Fresh start, load normal context
     │
@@ -26,7 +26,7 @@ pi starts / resumes
 
 ## Recovery Flag Format
 
-Located in `~/.pi/CONTEXT.md` or AGENTS.md header:
+Located in `~/.pi/prism-identity/context/CONTEXT.md` or AGENTS.md header:
 
 ```markdown
 # resumed-from: unified-manager
@@ -34,7 +34,7 @@ Located in `~/.pi/CONTEXT.md` or AGENTS.md header:
 # resumed-at: 2026-03-24T12:00:00Z
 ```
 
-Or in JSON format in `CONTEXT.md`:
+Or in JSON format in `~/.pi/prism-identity/context/CONTEXT.md`:
 
 ```json
 {
@@ -250,7 +250,7 @@ Recovery: Flag as requiring manual review
 | Super-orchestrator | `~/.pi/agent/skills/unified-manager/.state/master-state.json` |
 | Per-project orchestrator | `PROJECT/.state/orchestrator-state.json` |
 | Worker sessions | Managed by pi subagent system |
-| CONTEXT.md | `~/.pi/CONTEXT.md` |
+| CONTEXT.md | `~/.pi/prism-identity/context/CONTEXT.md` |
 
 ## Error Handling
 
